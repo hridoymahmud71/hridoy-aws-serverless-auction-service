@@ -1,4 +1,4 @@
-service: aws-auction-service
+service: hridoy-aws-auction-service
 
 provider:
   name: aws
@@ -11,7 +11,7 @@ provider:
     - ${file(iam/AuctionTableIAM.yml):AuctionTableIAM}
 
 custom:
-  auctionTableName: auction-table-${self:provider.stage}
+  auctionTableName: hridoy-auction-table-${self:provider.stage}
 
 functions:
   createAuction:

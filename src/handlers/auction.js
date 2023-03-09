@@ -101,10 +101,18 @@ const getAuctionDetails = async (event) => {
     const { Item } = await db.send(new GetItemCommand(params));
 
     console.log({ Item });
-    response.body = JSON.stringify({
-      message: "Successfully retrieved auction.",
-      data: Item ? unmarshall(Item) : {},
-    });
+
+    if (Item) {
+      response.body = JSON.stringify({
+        message: "Successfully retrieved auction.",
+        data: Item ? unmarshall(Item) : {},
+      });
+    } else {
+      response.body = JSON.stringify({
+        message: "No auction is found",
+        data: {},
+      });
+    }
   } catch (e) {
     console.error(e);
     response.statusCode = 500;

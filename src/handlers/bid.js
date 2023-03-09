@@ -25,7 +25,7 @@ const placeBid = async (event) => {
     return response;
   }
 
-  if (data.highestBid.amount <= highestBid.amount) {
+  if (data.highestBid.amount >= highestBid.amount) {
     response.statusCode = 500;
     response.body = JSON.stringify({
       message:
