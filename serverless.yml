@@ -1,0 +1,56 @@
+service: aws-auction-service
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: dev
+  region: us-east-1
+  environment:
+    DYNAMODB_TABLE_NAME: ${self:custom.auctionTableName}
+  iamRoleStatements:
+    - ${file(iam/AuctionTableIAM.yml):AuctionTableIAM}
+
+custom:
+  auctionTableName: auction-table-${self:provider.stage}
+
+functions:
+  createAuction:
+    handler: src/handlers/auction.createAuction
+    events:
+      - http:
+          path: create-auction
+          method: POST
+  getAuctions:
+    handler: src/handlers/auction.getAuctions
+    events:
+      - http:
+          path: get-auctions
+          method: GET
+  getAuctionDetails:
+    handler: src/handlers/auction.getAuctionDetails
+    events:
+      - http:
+          path: auction-details/{id}
+          method: GET
+  placeBid:
+    handler: src/handlers/bid.placeBid
+    events:
+      - http:
+          path: auction/{id}/place-bid
+          method: PATCH
+  getEndedAuction:
+    handler: src/lib/getEndedAuction.getEndedAuctions
+    events:
+      - http:
+          path: auction/running-auction
+          method: GET
+  processAuction:
+    handler: src/handlers/processAuction.handler
+    events:
+      - http:
+          path: auction/close-auction
+          method: GET
+
+resources:
+  Resources:
+    AuctionTable: ${file(resources/AuctionTable.yml):AuctionTable}

@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "c847998f-0ec0-4307-bdcd-0e694887c0ee",
+		"name": "AWS Auction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20976276"
+	},
+	"item": [
+		{
+			"name": "Create Auction",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"WPL T20 Auction\"\r\n}"
+				},
+				"url": {
+					"raw": "https://xekdgeaek5.execute-api.us-east-1.amazonaws.com/dev/create-auction",
+					"protocol": "https",
+					"host": [
+						"xekdgeaek5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"create-auction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auction List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://xekdgeaek5.execute-api.us-east-1.amazonaws.com/dev/get-auctions?status=OPEN",
+					"protocol": "https",
+					"host": [
+						"xekdgeaek5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"get-auctions"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "OPEN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auction Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xekdgeaek5.execute-api.us-east-1.amazonaws.com/dev/auction-details/5fa38c8a-1532-47ae-8c19-6e287323ff3",
+					"protocol": "https",
+					"host": [
+						"xekdgeaek5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"auction-details",
+						"5fa38c8a-1532-47ae-8c19-6e287323ff3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place-Bid",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"highestBid\": {\r\n        \"amount\": 480\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://xekdgeaek5.execute-api.us-east-1.amazonaws.com/dev/auction/5fa38c8a-1532-47ae-8c19-6e287323ff3/place-bid",
+					"protocol": "https",
+					"host": [
+						"xekdgeaek5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"auction",
+						"5fa38c8a-1532-47ae-8c19-6e287323ff3",
+						"place-bid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Running Auction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://xekdgeaek5.execute-api.us-east-1.amazonaws.com/dev/auction/running-auction",
+					"protocol": "https",
+					"host": [
+						"xekdgeaek5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"auction",
+						"running-auction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close Auction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://xekdgeaek5.execute-api.us-east-1.amazonaws.com/dev/auction/close-auction",
+					"protocol": "https",
+					"host": [
+						"xekdgeaek5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"auction",
+						"close-auction"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
