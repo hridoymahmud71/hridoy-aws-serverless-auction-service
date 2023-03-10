@@ -39,7 +39,6 @@ const handler = async (event) => {
     response.body = JSON.stringify({
       message: "Failed to get auction.",
       errorMsg: e.message,
-      errorStack: e.stack,
     });
   }
 

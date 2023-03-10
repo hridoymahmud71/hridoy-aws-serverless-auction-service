@@ -48,7 +48,6 @@ const createAuction = async (event) => {
     response.body = JSON.stringify({
       message: "Failed to create auction.",
       errorMsg: e.message,
-      errorStack: e.stack,
     });
   }
 
@@ -84,7 +83,6 @@ const getAuctions = async (event) => {
     response.body = JSON.stringify({
       message: "Failed to retrieve auctions.",
       errorMsg: e.message,
-      errorStack: e.stack,
     });
   }
 
@@ -120,7 +118,6 @@ const getAuctionDetails = async (event) => {
     response.body = JSON.stringify({
       message: "Failed to get auction.",
       errorMsg: e.message,
-      errorStack: e.stack,
     });
   }
 
