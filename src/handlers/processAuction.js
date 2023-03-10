@@ -31,7 +31,7 @@ const handler = async (event) => {
 
     response.statusCode = 200;
     response.body = JSON.stringify({
-      message: "Successfully closed " + count + " auction item",
+      message: `Successfully closed  ${count}  auction item`,
     });
   } catch (e) {
     console.error(e);

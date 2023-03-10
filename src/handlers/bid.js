@@ -28,8 +28,7 @@ const placeBid = async (event) => {
   if (data.highestBid.amount >= highestBid.amount) {
     response.statusCode = 500;
     response.body = JSON.stringify({
-      message:
-        "Currently Maximum bid amount is " + data.highestBid.amount + " Taka",
+      message: `Currently Maximum bid amount is  ${data.highestBid.amount}  Taka`,
     });
     return response;
   } else {
