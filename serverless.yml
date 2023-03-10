@@ -50,7 +50,7 @@ resources:
     UserClient:
       Type: AWS::Cognito::UserPoolClient
       Properties:
-        ClientName: user-pool-ui
+        ClientName: hridoy-user-pool-ui
         GenerateSecret: false
         UserPoolId: { Ref: UserPool }
         AccessTokenValidity: 5
