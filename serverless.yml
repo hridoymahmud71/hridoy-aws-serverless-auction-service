@@ -14,42 +14,20 @@ custom:
   auctionTableName: hridoy-auction-table-${self:provider.stage}
 
 functions:
-  createAuction:
-    handler: src/handlers/auction.createAuction
-    events:
-      - http:
-          path: create-auction
-          method: POST
-  getAuctions:
-    handler: src/handlers/auction.getAuctions
-    events:
-      - http:
-          path: get-auctions
-          method: GET
-  getAuctionDetails:
-    handler: src/handlers/auction.getAuctionDetails
-    events:
-      - http:
-          path: auction-details/{id}
-          method: GET
-  placeBid:
-    handler: src/handlers/bid.placeBid
-    events:
-      - http:
-          path: auction/{id}/place-bid
-          method: PATCH
-  getEndedAuction:
-    handler: src/lib/getEndedAuction.getEndedAuctions
-    events:
-      - http:
-          path: auction/running-auction
-          method: GET
+  createAuction: ${file(aws/function/LambdaFunction.yml):createAuctionFunction} # Authenticated
+  getAuctions: ${file(aws/function/LambdaFunction.yml):getAuctionFunction}
+  getAuctionDetails: ${file(aws/function/LambdaFunction.yml):getAuctionDetailsFunction}
+  placeBid: ${file(aws/function/LambdaFunction.yml):placeBidFunction} #Authenticated
+  runningAuction: ${file(aws/function/LambdaFunction.yml):runningAuctionFunction}
   processAuction:
     handler: src/handlers/processAuction.handler
     events:
       - http:
           path: auction/close-auction
           method: GET
+  signupUser: ${file(aws/function/LambdaFunction.yml):signupUserFunction}
+  loginUser: ${file(aws/function/LambdaFunction.yml):loginUserFunction}
+  userInfo: ${file(aws/function/LambdaFunction.yml):userInfoFunction} #Authenticated
 
 resources:
   Resources:

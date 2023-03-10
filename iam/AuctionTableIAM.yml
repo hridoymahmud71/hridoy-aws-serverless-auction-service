@@ -1,11 +1,15 @@
 AuctionTableIAM:
   Effect: "Allow"
   Action:
+    - cognito-idp:AdminInitiateAuth
+    - cognito-idp:AdminCreateUser
+    - cognito-idp:AdminSetUserPassword
     - "dynamodb:PutItem"
     - "dynamodb:Scan"
     - "dynamodb:GetItem"
     - "dynamodb:UpdateItem"
     - "dynamodb:Query"
-  Resource:
-    - !GetAtt AuctionTable.Arn
-    - !Join ["", [!GetAtt AuctionTable.Arn, "/index/statusAndEndDate"]]
+  Resource: "*"
+  # Resource:
+  #   - !GetAtt AuctionTable.Arn
+  #   - !Join ["", [!GetAtt AuctionTable.Arn, "/index/statusAndEndDate"]]

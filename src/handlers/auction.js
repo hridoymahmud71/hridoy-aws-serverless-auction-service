@@ -24,6 +24,7 @@ const createAuction = async (event) => {
       id: uuid(),
       title: title,
       status: "OPEN",
+      seller: event.requestContext.authorizer.claims.email,
       highestBid: {
         amount: 0,
       },

@@ -1,0 +1,78 @@
+createAuctionFunction:
+  handler: src/handlers/auction.createAuction
+  events:
+    - http:
+        path: create-auction
+        method: POST
+        cors: true
+        authorizer:
+          name: PrivateAuthorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+              - UserPool
+              - Arn
+          claims:
+            - email
+getAuctionFunction:
+  handler: src/handlers/auction.getAuctions
+  events:
+    - http:
+        path: get-auctions
+        method: GET
+getAuctionDetailsFunction:
+  handler: src/handlers/auction.getAuctionDetails
+  events:
+    - http:
+        path: auction-details/{id}
+        method: GET
+placeBidFunction:
+  handler: src/handlers/bid.placeBid
+  events:
+    - http:
+        path: auction/{id}/place-bid
+        method: PATCH
+        cors: true
+        authorizer:
+          name: PrivateAuthorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+              - UserPool
+              - Arn
+          claims:
+            - email
+runningAuctionFunction:
+  handler: src/lib/getEndedAuction.getEndedAuctions
+  events:
+    - http:
+        path: auction/running-auction
+        method: GET
+signupUserFunction:
+  handler: src/auth/signup.handler
+  events:
+    - http:
+        path: auth/signup
+        method: post
+loginUserFunction:
+  handler: src/auth/login.handler
+  events:
+    - http:
+        path: auth/login
+        method: post
+userInfoFunction:
+  handler: src/auth/user.handler
+  events:
+    - http:
+        path: auth/user-info
+        method: post
+        cors: true
+        authorizer:
+          name: PrivateAuthorizer
+          type: COGNITO_USER_POOLS
+          arn:
+            Fn::GetAtt:
+              - UserPool
+              - Arn
+          claims:
+            - email
