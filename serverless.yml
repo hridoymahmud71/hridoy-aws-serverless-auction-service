@@ -54,3 +54,28 @@ functions:
 resources:
   Resources:
     AuctionTable: ${file(resources/AuctionTable.yml):AuctionTable}
+    UserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        UserPoolName: hridoy-auction-service-auth-pool
+        Schema:
+          - Name: email
+            Required: true
+            Mutable: true
+          - Name: name
+            Required: true
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 6
+        AutoVerifiedAttributes: ["email"]
+
+    UserClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:
+        ClientName: user-pool-ui
+        GenerateSecret: false
+        UserPoolId: { Ref: UserPool }
+        AccessTokenValidity: 5
+        IdTokenValidity: 5
+        ExplicitAuthFlows:
+          - "ADMIN_NO_SRP_AUTH"
